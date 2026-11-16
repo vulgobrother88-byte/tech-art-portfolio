@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tech Art — Desafio Interativo</title>
+  <meta name="description" content="Tech Art — Soluções Digitais Inteligentes. Conheça nosso portfólio através de uma experiência interativa.">
+  <meta property="og:title" content="Tech Art — Desafio Interativo"><meta property="og:description" content="Encontre a marca Tech Art em uma experiência tecnológica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+</head>
+<body class="game-page">
+  <main class="game-shell">
+    <a class="game-brand" href="{{ url_for('main.home') }}" aria-label="Voltar para a Tech Art"><img src="{{ url_for('static', filename='images/branding/techart-reference.png') }}" alt="Tech Art"></a>
+    <a class="back-link" href="{{ url_for('main.home') }}">← VOLTAR AO PORTFÓLIO</a>
+    <section class="game-card" aria-live="polite">
+      <div id="intro-screen" class="screen active">
+        <p class="kicker">EXPERIÊNCIA INTERATIVA</p><h1>DESAFIO <span>TECH ART</span></h1>
+        <p class="lead">Você consegue encontrar todas as letras escondidas?</p><p>Encontre as letras e complete a marca TECH ART.</p>
+        <button id="start-game" class="game-button">COMEÇAR DESAFIO</button>
+        <p id="best-score" class="best-score"></p>
+      </div>
+      <div id="play-screen" class="screen" hidden>
+        <header class="game-hud"><div><small>PROGRESSO</small><strong id="word-progress" aria-label="Progresso da palavra">_ _ _ _ &nbsp; _ _ _</strong></div><div class="timer"><small>TEMPO</small><strong id="timer">00:00</strong></div><div><small>TENTATIVAS</small><strong id="attempts">0</strong></div></header>
+        <p id="instruction" class="instruction">Encontre a letra <strong>T</strong> no cenário.</p>
+        <div id="scene" class="tech-scene" role="application" aria-label="Cenário do desafio. Encontre a letra escondida.">
+          <div class="grid"></div><div class="network n1"></div><div class="network n2"></div><div class="circuit c1"></div><div class="circuit c2"></div><div class="circuit c3"></div>
+          <button id="letter-hit" class="letter-hit" aria-label="Letra escondida"></button><div id="hidden-letter" class="hidden-letter" aria-hidden="true"></div><div id="feedback" class="feedback" role="status"></div>
+        </div>
+        <p class="hint">Observe os circuitos, as formas e os reflexos. Toque na letra quando encontrá-la.</p>
+      </div>
+      <div id="win-screen" class="screen" hidden>
+        <div class="victory-orbit"></div><p class="kicker">DESAFIO CONCLUÍDO</p><h1>PARABÉNS!</h1><p class="lead">Você encontrou todas as letras da marca Tech Art.</p><div class="completed-brand">TECH <span>ART</span></div>
+        <div class="score-grid"><div><small>SEU TEMPO</small><strong id="final-time">00:00</strong></div><div><small>TENTATIVAS</small><strong id="final-attempts">0</strong></div></div>
+        <p>Você descobriu a Tech Art!</p><p class="future">Vamos criar o futuro juntos?</p><section class="ranking-entry"><label class="ranking-choice"><input id="join-ranking" type="checkbox"> Quero aparecer no ranking geral</label><form id="ranking-form" hidden enctype="multipart/form-data"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input id="player-name" name="name" maxlength="60" minlength="2" placeholder="Seu nome" required><label class="photo-label">Sua foto (opcional)<input id="player-photo" name="photo" type="file" accept="image/png,image/jpeg,image/webp"></label><button class="game-button" type="submit">SALVAR NO RANKING</button></form><p id="ranking-result" class="ranking-result" role="status"></p></section><div class="win-actions"><a class="game-button" href="{{ url_for('main.home') }}#ranking">VER RANKING</a><button id="play-again" class="secondary-button">JOGAR NOVAMENTE</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body></html>
